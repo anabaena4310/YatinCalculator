@@ -8,9 +8,6 @@ from django.template import loader
 import numpy as np
 
 #
-def index(request):
-    return HttpResponse('Hello World ,from test1')
-#
 def predict_input(request):
     from test1.include.pred_price import  PredPrice
     return render(request, 'test1/predict_input.html')
@@ -43,16 +40,3 @@ def predict(request):
                   {'price': price_int[0] })         # テンプレートに渡すデータ
     else:
         return HttpResponse('predict')
-#
-def form_test(request):
-    form = MyForm()
-    if request.method == 'POST':
-        print(request.POST["text"] )
-        form = MyForm(data=request.POST)  # ← 受け取ったPOSTデータを渡す
-        if form.is_valid():  # ← 受け取ったデータの正当性確認
-            pass  # ← 正しいデータを受け取った場合の処理
-        return HttpResponse('form_test_post')
-    else:
-        return render(request, 'test1/form.html', {
-            'form': form,
-        })
